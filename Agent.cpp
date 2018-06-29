@@ -13,7 +13,7 @@ int Agent::agentId = 1000;
 Agent::Agent(const std::string& name, const float commRate)
 	: m_commissionRate(commRate), m_agentName(name),
 	  m_uniqueAgentId(++Agent::agentId) {
-	
+
 	std::cout << "Agent <" << std::left << name
 		<< "> with commission rate " << commRate
 		<< " added." << std::endl;

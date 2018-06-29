@@ -23,15 +23,15 @@ class Policy {
 
 public:
 	Policy(const double, const std::shared_ptr<CommissionPlan>&);
-	
+
 	~Policy();
-	
+
 	double getFaceAmount() const;
-	
+
 	int getUniqueId() const;
-	
+
 	void recordSellingAgent(const std::shared_ptr<Agent>&);
-	
+
 	void recordSuperAgent(const std::shared_ptr<Agent>&);
 
 	// Calculate agent commissions for this policy. We assume there

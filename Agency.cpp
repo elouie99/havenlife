@@ -97,7 +97,7 @@ std::shared_ptr<Policy> Agency::createPolicy(const double faceValue, const int c
 	std::shared_ptr<CommissionPlan> commPlan = getCommissionPlan(commPlanId);
 	if (commPlan)
 		return std::make_shared<Policy>(faceValue, commPlan);
-	
+
 	std::cout << "Invalid commission plan id specified: " << commPlanId << std::endl;
 	return nullptr;
 }
