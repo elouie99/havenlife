@@ -12,39 +12,25 @@
 #ifndef POLICY_H_
 #define POLICY_H_
 
-#include <memory>
-#include <vector>
-#include "CommissionPlan.h"
-#include "Agent.h"
+#include <cstdint>
 
 class Policy {
-	// Class variable to generate a unique id for each policy instance.
-	static int policyNo;
-
 public:
-	Policy(const double, const std::shared_ptr<CommissionPlan>&);
+    using PolicyNo = std::uint32_t;
+    // Class variable to generate a unique id for each policy instance.
+    static PolicyNo policyNo;
 
-	~Policy();
+    Policy(const double);
 
-	double getFaceAmount() const;
+    ~Policy();
 
-	int getUniqueId() const;
+    double getFaceAmount() const;
 
-	void recordSellingAgent(const std::shared_ptr<Agent>&);
-
-	void recordSuperAgent(const std::shared_ptr<Agent>&);
-
-	// Calculate agent commissions for this policy. We assume there
-	// are commission rates for each agent. If not, the corresponding
-	// agents will have zero commissions for this policy.
-	void calculateCommissions();
+    PolicyNo getUniqueId() const;
 
 private:
-	double m_faceAmount;
-	std::shared_ptr<CommissionPlan> m_commPlan;
-	int m_uniquePolicyNo;
-	std::shared_ptr<Agent> m_sellingAgent;
-	std::vector<std::shared_ptr<Agent>> m_superAgents;
+    double m_faceAmount;
+    PolicyNo m_uniquePolicyNo;
 };
 
 #endif /* POLICY_H_ */

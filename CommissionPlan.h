@@ -15,47 +15,50 @@
 #ifndef COMMISSIONPLAN_H_
 #define COMMISSIONPLAN_H_
 
+#include <cstdint>
 #include <initializer_list>
 #include <string>
 #include <vector>
 
 class CommissionPlan {
-	// Class variable to generate a unique id for each commission plan instance.
-	static int planId;
 public:
-	CommissionPlan(const std::string& name);
+    using CommPlanId = std::uint32_t;
+    // Class variable to generate a unique id for each commission plan instance.
+    static CommPlanId planId;
 
-	CommissionPlan(const std::string& planName, std::initializer_list<float> rates);
+    CommissionPlan(const std::string& name);
 
-	// Subscript operator to efficiently return the rate per agent.
-	float operator[](std::size_t);
+    CommissionPlan(const std::string& planName, std::initializer_list<float> rates);
 
-	// Return the number of commission rates specified in this plan.
-	std::size_t size() const;
+    // Subscript operator to efficiently return the rate per agent.
+    float operator[](std::size_t);
 
-	~CommissionPlan();
+    // Return the number of commission rates specified in this plan.
+    std::size_t size() const;
 
-	// Add new commission rates to a plan.
-	void addCommissions(std::initializer_list<float> rates);
+    ~CommissionPlan();
 
-	// Update commission rate for given agent.
-	// Agent           Index
-	// -----           -----
-	// selling agent   0
-	// super agent 1   1
-	// super agent 2   2, etc.
-	void updateCommission(std::size_t agentIndex, float rate);
+    // Add new commission rates to a plan.
+    void addCommissions(std::initializer_list<float> rates);
 
-	void listCommissionRates() const;
+    // Update commission rate for given agent.
+    // Agent           Index
+    // -----           -----
+    // selling agent   0
+    // super agent 1   1
+    // super agent 2   2, etc.
+    void updateCommission(std::size_t agentIndex, float rate);
 
-	std::string getPlanName() const;
+    void listCommissionRates() const;
 
-	int getUniqueId() const;
+    std::string getPlanName() const;
+
+    CommPlanId getUniqueId() const;
 
 private:
-	std::string m_planName;
-	int m_uniquePlanId;
-	std::vector<float> m_commissionPlanRates;
+    std::string m_planName;
+    CommPlanId m_uniquePlanId;
+    std::vector<float> m_commissionPlanRates;
 };
 
 #endif /* COMMISSIONPLAN_H_ */

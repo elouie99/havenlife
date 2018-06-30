@@ -12,32 +12,34 @@
 #ifndef AGENT_H_
 #define AGENT_H_
 
+#include <cstdint>
 #include <iostream>
-#include <memory>
 
 class Agent {
-	// Class variable to generate a unique id for each agent instance.
-	static int agentId;
 public:
-	Agent(const std::string&, const float);
+    using AgentId = std::uint32_t;
+    // Class variable to generate a unique id for each agent instance.
+    static AgentId agentId;
 
-	~Agent();
+    Agent(const std::string&, const float);
 
-	Agent(Agent&& rhs);
-	Agent& operator=(Agent&& rhs);
+    ~Agent();
 
-	void setCommissionRate(const float);
+    Agent(Agent&& rhs);
+    Agent& operator=(Agent&& rhs);
 
-	float getCommissionRate() const;
+    void setCommissionRate(const float);
 
-	int getUniqueId() const;
+    float getCommissionRate() const;
 
-	std::string getName() const;
+    AgentId getUniqueId() const;
+
+    std::string getName() const;
 
 private:
-	float m_commissionRate;
-	std::string m_agentName;
-	int m_uniqueAgentId;
+    float m_commissionRate;
+    std::string m_agentName;
+    AgentId m_uniqueAgentId;
 };
 
 #endif /* AGENT_H_ */
